@@ -21,13 +21,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_02_011518) do
     t.integer "seating_capacity"
     t.integer "rental_duration"
   end
-
-  create_table "greetings", force: :cascade do |t|
-    t.text "message"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
+  
   create_table "myreservation", primary_key: "reservation_id", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.integer "car_id"
