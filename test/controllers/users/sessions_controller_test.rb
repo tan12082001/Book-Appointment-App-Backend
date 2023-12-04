@@ -1,4 +1,4 @@
-require "test_helper"
+require 'test_helper'
 
 class Users::SessionsController < Devise::SessionsController
   before_action :configure_sign_in_params, only: [:create]
