@@ -1,10 +1,10 @@
 class Car < ApplicationRecord
-  has_and_belongs_to_many :users, join_table: :my_reservations
-  validates :name, presence: true
+  has_many :users, through: :my_reservations
+  has_many :my_reservations
+
+  validates :name, presence: true, length: { minimum: 2, maximum: 150 }
   validates :description, presence: true
   validates :pricePerHr, presence: true
   validates :seating_capacity, presence: true
   validates :rental_duration, presence: true
-
-  # Add any other validations or associations you need
 end
