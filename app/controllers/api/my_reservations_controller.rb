@@ -1,6 +1,8 @@
 class Api::MyReservationsController < ApplicationController
+  # before_action :authenticate_user!
+    
   def index
-    @user = User.first
+    @user = User.find(params[:user_id])
     @reservations = MyReservation.where(user_id: @user.id).includes(:car)
     reservations_json = @reservations.map do |item|
       {
