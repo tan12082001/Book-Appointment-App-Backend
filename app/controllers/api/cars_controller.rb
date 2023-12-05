@@ -1,8 +1,8 @@
 class Api::CarsController < ApplicationController
-  before_action :find_car, only: [:show]
+  before_action :find_car, only: [:show, :destroy]
 
   def index
-    @cars = Car.all
+    @cars = Car.where(deleted_at: nil)
     render json: @cars, only: %i[id name description]
   end
 
@@ -20,6 +20,16 @@ class Api::CarsController < ApplicationController
     end
   end
 
+  def destroy
+    # Instead of deleting, mark as deleted
+    if @car
+      @car.update(deleted_at: Time.now)
+      render json: { message: 'Car marked as removed' }
+    else
+      render json: { error: 'Car not found' }, status: :not_found
+    end
+  end
+
   private
 
   def find_car
@@ -27,6 +37,6 @@ class Api::CarsController < ApplicationController
   end
 
   def car_params
-    params.require(:car).permit(name, description, pricePerHr, seating_capacity, rental_duration)
+    params.require(:car).permit(:name, :description, :pricePerHr, :seating_capacity, :rental_duration)
   end
 end
