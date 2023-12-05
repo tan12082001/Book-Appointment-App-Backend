@@ -19,4 +19,25 @@ class Api::MyReservationsController < ApplicationController
 
     render json: reservations_json
   end
+
+  def create
+    @user = User.find(params[:user_id])
+    @car = Car.find(params[:car_id])
+
+    @reservation = MyReservation.new(reserve_params)
+    @reservation.user = @user
+    @reservation.car = @car
+
+    if @reservation.save
+      render json: @reservation, status: :created, location: api_path(@user)
+    else
+      render json: @reservation.errors, status: :unprocessable_entity
+    end
+  end
+
+  private
+
+  def reserve_params
+    params.require(:my_reservation).permit(:date, :city)
+  end
 end
