@@ -1,9 +1,8 @@
 class Api::MyReservationsController < ApplicationController
-  # before_action :authenticate_user!
+  before_action :authenticate_api_user!
 
   def index
-    @user = User.find(params[:user_id])
-    @reservations = MyReservation.where(user_id: @user.id).includes(:car)
+    @reservations = MyReservation.where(user_id: current_api_user).includes(:car)
     reservations_json = @reservations.map do |item|
       {
         'car' => {
@@ -21,11 +20,10 @@ class Api::MyReservationsController < ApplicationController
   end
 
   def create
-    @user = User.find(params[:user_id])
     @car = Car.find(params[:car_id])
 
     @reservation = MyReservation.new(reserve_params)
-    @reservation.user = @user
+    @reservation.user = current_api_user
     @reservation.car = @car
 
     if @reservation.save
