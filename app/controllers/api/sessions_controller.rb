@@ -14,4 +14,12 @@ class Api::SessionsController < Devise::SessionsController
       return
     end
   end
+
+  def index
+    if current_user
+      render json: { message: 'User data retrieved successfully', user: current_user }
+    else
+      render json: { message: 'No user logged in' }, status: :unprocessable_entity
+    end
+  end
 end
