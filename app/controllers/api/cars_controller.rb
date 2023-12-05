@@ -1,4 +1,5 @@
 class Api::CarsController < ApplicationController
+  # before_action :authenticate_user!
   before_action :find_car, only: [:show]
 
   def index
