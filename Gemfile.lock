@@ -141,8 +141,6 @@ GEM
       racc (~> 1.4)
     orm_adapter (0.5.0)
     parallel (1.23.0)
-    paranoia (2.6.3)
-      activerecord (>= 5.1, < 7.2)
     parser (3.2.2.4)
       ast (~> 2.4.1)
       racc
@@ -263,7 +261,6 @@ DEPENDENCIES
   bootsnap
   debug
   devise (~> 4.9)
-  paranoia (~> 2.5)
   pg (~> 1.1)
   psych (~> 4.0.1)
   puma (>= 5.0)
@@ -278,3 +275,4 @@ RUBY VERSION
 
 BUNDLED WITH
    2.4.10
+   
