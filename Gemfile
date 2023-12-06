@@ -38,6 +38,6 @@ group :development do
 end
 
 gem 'paranoia', '~> 2.5'
-gem 'rack-cors'
 gem 'devise-jwt'
+gem 'rack-cors'
 gem 'rswag'
