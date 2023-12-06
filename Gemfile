@@ -22,7 +22,6 @@ gem 'bootsnap', require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
 # gem "rack-cors"
 gem 'psych', '~> 4.0.1'
-
 gem 'rails', '~> 7.1.2'
 
 group :development, :test do
@@ -34,10 +33,9 @@ end
 group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-  gem 'rubocop', '>= 1.0', '< 2.0'
   gem 'rails-controller-testing'
   gem 'devise', '~> 4.9'
 end
 
-gem 'rswag'
 gem 'paranoia', '~> 2.5'
+gem 'rswag'
