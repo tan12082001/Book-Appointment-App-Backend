@@ -97,6 +97,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    diff-lcs (1.5.0)
     drb (2.2.0)
       ruby2_keywords
     erubi (1.12.0)
@@ -208,6 +209,20 @@ GEM
     rexml (3.2.6)
     rspec-core (3.12.2)
       rspec-support (~> 3.12.0)
+    rspec-expectations (3.12.3)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.12.0)
+    rspec-mocks (3.12.6)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.12.0)
+    rspec-rails (6.1.0)
+      actionpack (>= 6.1)
+      activesupport (>= 6.1)
+      railties (>= 6.1)
+      rspec-core (~> 3.12)
+      rspec-expectations (~> 3.12)
+      rspec-mocks (~> 3.12)
+      rspec-support (~> 3.12)
     rspec-support (3.12.1)
     rswag (2.13.0)
       rswag-api (= 2.13.0)
@@ -269,6 +284,7 @@ DEPENDENCIES
   puma (>= 5.0)
   rails (~> 7.1.2)
   rails-controller-testing
+  rspec-rails
   rswag
   rubocop (>= 1.0, < 2.0)
   tzinfo-data
@@ -278,4 +294,3 @@ RUBY VERSION
 
 BUNDLED WITH
    2.4.10
-   

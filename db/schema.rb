@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_03_200457) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_06_134253) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_03_200457) do
     t.integer "rental_duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+    t.boolean "removed"
+    t.index ["deleted_at"], name: "index_cars_on_deleted_at"
   end
 
   create_table "my_reservations", id: false, force: :cascade do |t|
