@@ -39,3 +39,6 @@ end
 
 gem 'paranoia', '~> 2.5'
 gem 'rswag'
+gem 'rack-cors'
+gem 'devise-jwt'
+
