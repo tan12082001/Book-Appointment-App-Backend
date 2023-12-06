@@ -1,4 +1,5 @@
 class Api::CarsController < ApplicationController
+  before_action :authenticate_api_user!
   before_action :find_car, only: [:show]
 
   def index
@@ -14,7 +15,7 @@ class Api::CarsController < ApplicationController
     @car = Car.new(car_params)
 
     if @car.save
-      render json: @car, status: :created, location: @car
+      render json: @car, status: :created, location: api_all_cars_path
     else
       render json: @car.errors, status: :unprocessable_entity
     end
@@ -27,6 +28,6 @@ class Api::CarsController < ApplicationController
   end
 
   def car_params
-    params.require(:car).permit(name, description, pricePerHr, seating_capacity, rental_duration)
+    params.require(:car).permit(:name, :description, :pricePerHr, :seating_capacity, :rental_duration)
   end
 end
