@@ -37,7 +37,7 @@ group :development do
   gem 'rails-controller-testing'
 end
 
-gem 'paranoia', '~> 2.5'
 gem 'devise-jwt'
+gem 'paranoia', '~> 2.5'
 gem 'rack-cors'
 gem 'rswag'
