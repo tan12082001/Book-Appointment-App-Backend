@@ -1,5 +1,5 @@
 class Api::CarsController < ApplicationController
-  before_action :find_car, only: [:show, :destroy]
+  before_action :find_car, only: %i[show destroy]
 
   def index
     @cars = Car.where(deleted_at: nil)
