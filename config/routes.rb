@@ -6,6 +6,10 @@ Rails.application.routes.draw do
         registrations: 'api/registrations'
       }
 
+    resources :cars do
+      delete 'destroy', on: :member, to: 'cars#destroy'
+    end
+
     get 'all_cars', to: 'cars#index'
     get 'cars/:id', to: 'cars#show'
     post 'car/new_car', to: 'cars#create'

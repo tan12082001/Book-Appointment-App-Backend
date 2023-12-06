@@ -1,8 +1,6 @@
 source 'https://rubygems.org'
 ruby '3.2.2'
-# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 7.1.2'
-gem 'psych', '~> 4.0.1'
+
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 # Use the Puma web server [https://github.com/puma/puma]
@@ -23,16 +21,23 @@ gem 'bootsnap', require: false
 # gem "image_processing", "~> 1.2"
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
 # gem "rack-cors"
+gem 'psych', '~> 4.0.1'
+gem 'rails', '~> 7.1.2'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri windows]
+  gem 'rspec-rails'
 end
+
 group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+  gem 'devise', '~> 4.9'
+  gem 'rails-controller-testing'
 end
-gem 'rubocop', '>= 1.0', '< 2.0'
-gem 'rails-controller-testing'
-gem 'devise', '~> 4.9'
 
+gem 'devise-jwt'
+gem 'paranoia', '~> 2.5'
+gem 'rack-cors'
 gem 'rswag'
