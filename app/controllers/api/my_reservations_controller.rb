@@ -27,7 +27,7 @@ class Api::MyReservationsController < ApplicationController
     @reservation.car = @car
 
     if @reservation.save
-      render json: @reservation, status: :created, location: api_path(@user)
+      render json: @reservation, status: :created, location: api_my_reservations_path
     else
       render json: @reservation.errors, status: :unprocessable_entity
     end
