@@ -2,17 +2,25 @@ class Api::SessionsController < Devise::SessionsController
   respond_to :json
 
   def create
-    super do |resource|
-      render json: { message: 'Login successful', user: resource }
-      return
+    user = User.find_by(username: params[:user][:username])
+
+    if user&.valid_password?(params[:user][:password])
+      sign_in(user)
+      render json: { message: 'Login successful', user: }
+    else
+      render json: { message: 'Invalid username or password' }, status: :unauthorized
     end
   end
 
   def destroy
-    super do
-      render json: { message: 'Logout successful' }
-      return
-    end
+    jwt_payload = JWT.decode(request.headers['Authorization'].split[1],
+                             Rails.application.credentials.fetch(:secret_key_base)).first
+    current_user = User.find(jwt_payload['sub'])
+    return unless current_user
+
+    sign_out(current_user)
+    render json: { message: 'Logout successful' }
+    nil
   end
 
   def index
