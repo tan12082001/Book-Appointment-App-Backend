@@ -3,6 +3,7 @@ class Car < ApplicationRecord
   has_many :my_reservations
 
   validates :name, presence: true, length: { minimum: 2, maximum: 150 }
+  validates :image, presence: true
   validates :description, presence: true
   validates :pricePerHr, presence: true
   validates :seating_capacity, presence: true
