@@ -4,7 +4,7 @@ class Api::CarsController < ApplicationController
 
   def index
     @cars = Car.where(deleted_at: nil)
-    render json: @cars, only: %i[id name description]
+    render json: @cars
   end
 
   def show
