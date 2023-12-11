@@ -4,7 +4,7 @@ class Api::CarsController < ApplicationController
 
   def index
     @cars = Car.where(deleted_at: nil)
-    render json: @cars, only: %i[id name description]
+    render json: @cars
   end
 
   def show
@@ -15,7 +15,7 @@ class Api::CarsController < ApplicationController
     @car = Car.new(car_params)
 
     if @car.save
-      render json: @car, status: :created, location: api_cars_path
+      render json: @car, status: :created, location: api_all_cars_path
     else
       render json: @car.errors, status: :unprocessable_entity
     end
@@ -38,6 +38,6 @@ class Api::CarsController < ApplicationController
   end
 
   def car_params
-    params.require(:car).permit(:name, :description, :pricePerHr, :seating_capacity, :rental_duration)
+    params.require(:car).permit(:name, :description, :image, :pricePerHr, :seating_capacity, :rental_duration)
   end
 end

@@ -2,7 +2,7 @@ class Api::MyReservationsController < ApplicationController
   before_action :authenticate_api_user!
 
   def index
-    @reservations = MyReservation.where(user_id: current_api_user).includes(:car)
+    @reservations = MyReservation.where(user_id: current_api_user)
     reservations_json = @reservations.map do |item|
       {
         'car' => {
