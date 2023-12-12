@@ -17,6 +17,9 @@
   - [Install](#install)
   - [Usage](#usage)
   - [Run tests](#run-tests)
+  - [Frontend Repository](#frontend-repository)
+  - [ERD Image](#erd-image)
+  - [API Documentation](#api-documentation)
 - [👥 Authors](#authors)
 - [🔭 Future Features](#future-features)
 - [🤝 Contributing](#contributing)
@@ -78,8 +81,15 @@ Use the following URL to clone this project:
 Open the terminal in the root directory of the project and run the following command to install all dependencies.
 
     bundle install
-    npm i
 
+### Frontend Repository
+Reference the [Frontend Repository](https://github.com/your-frontend-repo) for the corresponding frontend.
+
+### ERD Image
+Add an ERD image to visualize the database schema.
+
+### API Documentation
+Reference the API documentation for details on how to interact with the API.
 
 ### Usage
 To start the development server, run the following command then navigate to `localhost:3000` in your browser.
