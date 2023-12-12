@@ -1,9 +1,9 @@
 class Car < ApplicationRecord
+  acts_as_paranoid
   has_many :users, through: :my_reservations
   has_many :my_reservations
 
   validates :name, presence: true, length: { minimum: 2, maximum: 150 }
-  validates :image, presence: true
   validates :description, presence: true
   validates :pricePerHr, presence: true
   validates :seating_capacity, presence: true
