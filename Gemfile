@@ -37,7 +37,6 @@ group :development do
   gem 'rails-controller-testing'
 end
 
-
 gem 'database_cleaner'
 gem 'devise-jwt'
 gem 'factory_bot_rails'
