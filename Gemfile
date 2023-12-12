@@ -38,9 +38,9 @@ group :development do
 end
 
 gem 'devise-jwt'
+gem 'factory_bot_rails'
+gem 'database_cleaner'
 gem 'paranoia', '~> 2.5'
 gem 'rack-cors'
 gem 'rswag'
-gem 'factory_bot_rails'
 gem 'shoulda-matchers'
-gem 'database_cleaner'
