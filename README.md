@@ -87,6 +87,8 @@ Reference the [Frontend Repository](https://github.com/tan12082001/Vehicle-Booki
 
 ### ERD Image
 Add an ERD image to visualize the database schema.
+## follow the below link to access
+(https://drawsql.app/teams/wineshuga/diagrams/book-appointment)
 
 ### API Documentation
 Reference the API documentation for details on how to interact with the API.
