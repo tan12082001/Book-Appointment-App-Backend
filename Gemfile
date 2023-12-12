@@ -37,8 +37,9 @@ group :development do
   gem 'rails-controller-testing'
 end
 
-gem 'devise-jwt'
+
 gem 'database_cleaner'
+gem 'devise-jwt'
 gem 'factory_bot_rails'
 gem 'paranoia', '~> 2.5'
 gem 'rack-cors'
