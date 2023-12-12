@@ -83,7 +83,7 @@ Open the terminal in the root directory of the project and run the following com
     bundle install
 
 ### Frontend Repository
-Reference the [Frontend Repository](https://github.com/your-frontend-repo) for the corresponding frontend.
+Reference the [Frontend Repository](https://github.com/tan12082001/Vehicle-Booking-App-Frontend.git) for the corresponding frontend.
 
 ### ERD Image
 Add an ERD image to visualize the database schema.
