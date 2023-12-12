@@ -1,8 +1,22 @@
-example_id                                  | status | run_time        |
-------------------------------------------- | ------ | --------------- |
-./spec/models/car_spec.rb[1:1:1]            | passed | 0.00187 seconds |
-./spec/models/car_spec.rb[1:1:2]            | passed | 0.05522 seconds |
-./spec/models/my_reservation_spec.rb[1:1:1] | passed | 0.03853 seconds |
-./spec/models/my_reservation_spec.rb[1:1:2] | passed | 0.00198 seconds |
-./spec/models/user_spec.rb[1:1:1]           | passed | 0.00376 seconds |
-./spec/models/user_spec.rb[1:1:2]           | passed | 0.11558 seconds |
+example_id                                           | status | run_time        |
+---------------------------------------------------- | ------ | --------------- |
+./spec/models/car_spec.rb[1:1:1]                     | passed | 0.00587 seconds |
+./spec/models/car_spec.rb[1:1:2]                     | passed | 0.14159 seconds |
+./spec/models/my_reservation_spec.rb[1:1:1]          | passed | 0.00397 seconds |
+./spec/models/my_reservation_spec.rb[1:1:2]          | passed | 0.0029 seconds  |
+./spec/models/user_spec.rb[1:1:1]                    | passed | 0.00157 seconds |
+./spec/models/user_spec.rb[1:1:2]                    | passed | 0.002 seconds   |
+./spec/requests/api/cars_spec.rb[1:1:1]              | passed | 0.05168 seconds |
+./spec/requests/api/cars_spec.rb[1:2:1:1]            | passed | 2.02 seconds    |
+./spec/requests/api/cars_spec.rb[1:2:2:1]            | passed | 1.78 seconds    |
+./spec/requests/api/cars_spec.rb[1:3:1:1]            | passed | 0.02911 seconds |
+./spec/requests/api/cars_spec.rb[1:3:2:1]            | passed | 0.02891 seconds |
+./spec/requests/api/cars_spec.rb[1:4:1:1]            | passed | 0.02337 seconds |
+./spec/requests/api/cars_spec.rb[1:4:2:1]            | passed | 0.55206 seconds |
+./spec/requests/api/my_reservations_spec.rb[1:1:1]   | passed | 0.02825 seconds |
+./spec/requests/api/my_reservations_spec.rb[1:2:1:1] | passed | 0.0311 seconds  |
+./spec/requests/api/my_reservations_spec.rb[1:2:2:1] | passed | 0.05047 seconds |
+./spec/requests/api/registrations_spec.rb[1:1:1:1]   | passed | 0.01067 seconds |
+./spec/requests/api/registrations_spec.rb[1:1:2:1]   | passed | 0.10001 seconds |
+./spec/requests/api/sessions_spec.rb[1:1:1:1]        | passed | 0.02346 seconds |
+./spec/requests/api/sessions_spec.rb[1:1:2:1]        | passed | 0.01105 seconds |
