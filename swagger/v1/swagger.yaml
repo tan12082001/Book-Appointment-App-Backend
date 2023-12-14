@@ -1,15 +1,15 @@
 openapi: 3.0.1
 info:
-  title: Workspace Rentals API
+  title: Cabooky API
   description: |-
     To use the authorized endpoints:
       1. Register a new user
-      2. Log in with the user you registered
+      2. Log in with the registered user
       3. Copy the token string in the response body
       4. Click "Authorize [padlock-icon]", paste it in the "value" field, then click "Authorize".
   version: v1
 servers:
-  - url: http://localhost:3000
+  - url: http://localhost:4000
     description: Sandbox server for testing
 components:
   schemas:
@@ -22,37 +22,36 @@ components:
           type: string
         email:
           type: string
+        password:
+          type: string
       required:
         - id
         - username
         - email
+        - password
 
     Reservation:
       type: object
       properties:
         id:
           type: integer
-        start_date:
-          type: string
-          format: date
-        end_date:
+        date:
           type: string
           format: date
         city:
           type: string
-        workspace_id:
+        car_id:
           type: integer
         user_id:
           type: integer
       required:
         - id
-        - start_date
-        - end_date
+        - date
         - city
-        - workspace_id
+        - car_id
         - user_id
 
-    Workspace:
+    Car:
       type: object
       properties:
         id:
@@ -61,12 +60,22 @@ components:
           type: string
         description:
           type: string
-        image_url:
+        image:
           type: string
+        pricePerHr:
+          type: integer
+        seating_capacity:
+          type: integer
+        rental_duration:
+          type: integer
       required:
         - id
         - name
         - description
+        - image
+        - pricePerHr
+        - seating_capacity
+        - rental_duration
 
   securitySchemes:
     bearerAuth:
@@ -75,20 +84,20 @@ components:
       bearerFormat: JWT
 
 paths:
-  "/api/v1/registrations":
+  "/api/users":
     post:
-      summary: Registers a new user
+      summary: Creates a new user
       tags:
         - Users
       responses:
-        '201':
-          description: user registered successfully
+        '200':
+          description: Signup successful
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserResponse'
-        '400':
-          description: user not registered
+        '422':
+          description: Username can't be blank
           content:
             application/json:
               schema:
@@ -98,10 +107,22 @@ paths:
         content:
           application/x-www-form-urlencoded:
             schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+                - username
+                - email
+                - password
               $ref: '#/components/schemas/UserRegistration'
-        description: Username needed to create a new user.
+        description: Username, email, and password are needed to create a new user.
 
-  "/api/v1/reservations":
+  "/api/my_reservations":
     get:
       summary: Retrieves all reservations for the current user
       security:
@@ -115,12 +136,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ReservationListResponse'
-
+  
+  "/api/new_reserve":
     post:
       parameters:
-        - name: workspace
+        - name: car
           in: query
-          description: Workspace ID
+          description: Car ID
           required: true
           schema:
             type: integer
@@ -136,7 +158,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ReservationResponse'
-        '400':
+        '422':
           description: reservation not created
           content:
             application/json:
@@ -148,24 +170,66 @@ paths:
             schema:
               $ref: '#/components/schemas/ReservationCreation'
 
-  "/api/v1/reservations/{id}":
-    parameters:
-      - name: id
-        in: path
-        description: Reservation ID
-        required: true
-        schema:
-          type: integer
+  "/api/all_cars":
     get:
-      summary: Retrieves a specific reservation
+      summary: Retrieves all cars
       security:
         - bearerAuth: []
       tags:
-        - Reservations
+        - Cars
       responses:
         '200':
           description: successful
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ReservationResponse'
+                $ref: '#/components/schemas/CarResponse'
+  
+  "/api/cars/{id}":
+    parameters:
+      - name: id
+        in: path
+        description: Car ID
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Retrieves a specific car
+      security:
+        - bearerAuth: []
+      tags:
+        - Cars
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarResponse'
+        '404':
+          description: 'Car Not Found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  "/api/car/new_car":
+    post:
+      summary: Creates a new car
+      security:
+        - bearerAuth: []
+      tags:
+        - Cars
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarResponse'
+        '422':
+          description: 'Car not created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
