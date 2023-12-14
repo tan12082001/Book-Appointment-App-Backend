@@ -198,34 +198,27 @@ paths:
               schema:
                 type: object
                 properties:
-                  workspaces:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: integer
-                        name:
-                          type: string
-                        description:
-                          type: string
-                        image:
-                          type: string
-                        pricePerHr:
-                          type: integer
-                        seating_capacity:
-                          type: integer
-                        rental_duration:
-                          type: integer
-                      required:
-                      - id
-                      - name
-                      - description
-                      - image
-                      - pricePerHr
-                      - seating_capacity
-                      - rental_duration
- 
+                  reservation:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      date:
+                        type: string
+                        format: date
+                      city:
+                        type: string
+                      car_id:
+                        type: integer
+                      user_id:
+                        type: integer
+                    required:
+                    - id
+                    - date
+                    - city
+                    - car_id
+                    - user_id
+
   "/api/new_reserve":
     post:
       parameters:
@@ -294,26 +287,33 @@ paths:
               schema:
                 type: object
                 properties:
-                  reservation:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                      date:
-                        type: string
-                        format: date
-                      city:
-                        type: string
-                      car_id:
-                        type: integer
-                      user_id:
-                        type: integer
-                    required:
-                    - id
-                    - date
-                    - city
-                    - car_id
-                    - user_id
+                  cars:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        image:
+                          type: string
+                        pricePerHr:
+                          type: integer
+                        seating_capacity:
+                          type: integer
+                        rental_duration:
+                          type: integer
+                      required:
+                      - id
+                      - name
+                      - description
+                      - image
+                      - pricePerHr
+                      - seating_capacity
+                      - rental_duration
                   success:
                     type: string
 
@@ -339,21 +339,34 @@ paths:
               schema:
                 type: object
                 properties:
-                  workspace:
-                    type: object
-                    properties:
-                      id:
-                        type: integer
-                      name:
-                        type: string
-                      description:
-                        type: string
-                      image_url:
-                        type: string
-                    required:
-                    - id
-                    - name
-                    - description
+                  car:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        image:
+                          type: string
+                        pricePerHr:
+                          type: integer
+                        seating_capacity:
+                          type: integer
+                        rental_duration:
+                          type: integer
+                      required:
+                      - id
+                      - name
+                      - description
+                      - image
+                      - pricePerHr
+                      - seating_capacity
+                      - rental_duration
+
     delete:
       summary: Deletes a car
       security:
