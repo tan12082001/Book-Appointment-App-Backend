@@ -7,26 +7,26 @@
 
 # 📗 Table of Contents
 
-- [📖 About the Project](#about-project)
-  - [🛠 Built With](#built-with)
-    - [Tech Stack](#tech-stack)
-    - [Key Features](#key-features)
-- [💻 Getting Started](#getting-started)
-  - [Setup](#setup)
-  - [Prerequisites](#prerequisites)
-  - [Install](#install)
-  - [Usage](#usage)
-  - [Run tests](#run-tests)
-  - [Frontend Repository](#frontend-repository)
-  - [ERD Image](#erd-image)
-  - [API Documentation](#api-documentation)
-- [👥 Authors](#authors)
-- [🔭 Future Features](#future-features)
-- [🤝 Contributing](#contributing)
-- [⭐️ Show your support](#support)
-- [🙏 Acknowledgements](#acknowledgements)
-- [❓ FAQ (OPTIONAL)](#faq)
-- [📝 License](#license)
+- [📗 Table of Contents](#-table-of-contents)
+- [📖 vehicle booking app ](#-vehicle-booking-app-)
+  - [🛠 Built With ](#-built-with-)
+    - [Tech Stack ](#tech-stack-)
+    - [Key Features ](#key-features-)
+  - [💻 Getting Started ](#-getting-started-)
+    - [Prerequisites](#prerequisites)
+    - [Setup](#setup)
+    - [Install](#install)
+    - [Frontend Repository](#frontend-repository)
+    - [ERD Image](#erd-image)
+    - [API Documentation](#api-documentation)
+    - [Usage](#usage)
+    - [Run tests](#run-tests)
+  - [👥 Authors ](#-authors-)
+  - [🔭 Future Features ](#-future-features-)
+  - [🤝 Contributing ](#-contributing-)
+  - [⭐️ Show your support ](#️-show-your-support-)
+  - [🙏 Acknowledgments ](#-acknowledgments-)
+  - [📝 License ](#-license-)
 
 # 📖 vehicle booking app <a name="about-project"></a>
 
@@ -75,35 +75,55 @@ In order to run this project you need:
 
 Use the following URL to clone this project:
 
-  https://github.com/tan12082001/Vehicle-Booking-App-Backend.git
+  ```
+  git clone https://github.com/tan12082001/Vehicle-Booking-App-Backend.git
+
+  ```
 
 ### Install
 Open the terminal in the root directory of the project and run the following command to install all dependencies.
 
-    bundle install
+    - bundle install
+    - secret_base_key generation
+      In terminal: 
+      * rm credentials.yml.enc
+      * $ EDITOR="mate --wait" bin/rails credentials:edit
+
+    - configure database
+      In terminal: 
+      * run `rails db:create`
+      * run `db:migrate`
+
+    - Rspec
+      In terminal: 
+      * bundle exec rails db:schema:load RAILS_ENV=test
 
 ### Frontend Repository
 Reference the [Frontend Repository](https://github.com/tan12082001/Vehicle-Booking-App-Frontend.git) for the corresponding frontend.
 
 ### ERD Image
-Add an ERD image to visualize the database schema.
-## follow the below link to access
-(https://drawsql.app/teams/wineshuga/diagrams/book-appointment)
+[ERD image to visualize the database schema](https://drawsql.app/teams/wineshuga/diagrams/book-appointment)
 
 ### API Documentation
-Reference the API documentation for details on how to interact with the API.
+For details on how to interact with the API, view the API documentation. Follow the steps below:
+
+    - run server `rails s`
+    - open in browser `http://localhost:4000/api-docs`
 
 ### Usage
-To start the development server, run the following command then navigate to `localhost:3000` in your browser.
+To start the development server, run the following command then navigate to `localhost:4000` in your browser.
 
     rails s
 
-Open [http://localhost:3000](http://localhost:3000/api/random_greeting) to view it in your browser.
+Open [http://localhost:4000](http://localhost:4000) to view it in your browser.
 
 
 ### Run tests
-There are no tests to run.
+To run tests, use the following command:
 
+``` 
+  rspec
+```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -121,11 +141,12 @@ There are no tests to run.
 - GitHub: [@tan12082001](https://github.com/tan12082001)
 
 
-👤 **Winnie uzochukwu**
+👤 **Nweneary Uzochukwu Winnie**
 
-- GitHub: [@winnie](https://github.com/Wineshuga)
+- GitHub: [@wineshuga](https://github.com/Wineshuga)
+- LinkedIn: [LinkedIn](https://linkedin.com/in/wineshuga)
 
-👤 **Winnie uzochukwu**
+👤 **Bolaji Toyib**
 
 - GitHub: [@toyybi bolaji](https://github.com/Simpleshaikh1)
 

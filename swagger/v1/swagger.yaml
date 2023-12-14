@@ -1,0 +1,418 @@
+openapi: 3.0.1
+info:
+  title: Cabooky API
+  description: |-
+    To use the authorized endpoints:
+      1. Register a new user
+      2. Log in with the registered user
+      3. Copy the token string in the response body
+      4. Click "Authorize [padlock-icon]", paste it in the "value" field, then click "Authorize".
+  version: v1
+servers:
+  - url: http://localhost:4000
+    description: Sandbox server for testing
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      required:
+        - id
+        - username
+        - email
+        - password
+
+    Reservation:
+      type: object
+      properties:
+        id:
+          type: integer
+        date:
+          type: string
+          format: date
+        city:
+          type: string
+        car_id:
+          type: integer
+        user_id:
+          type: integer
+      required:
+        - id
+        - date
+        - city
+        - car_id
+        - user_id
+
+    Car:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        image:
+          type: string
+        pricePerHr:
+          type: integer
+        seating_capacity:
+          type: integer
+        rental_duration:
+          type: integer
+      required:
+        - id
+        - name
+        - description
+        - image
+        - pricePerHr
+        - seating_capacity
+        - rental_duration
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+paths:
+  "/api/users":
+    post:
+      summary: Creates a new user
+      tags:
+        - Users
+      responses:
+        '200':
+          description: Signup successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      username:
+                        type: string
+                      email:
+                        type: string
+                      password:
+                        type: string
+                    required:
+                    - id
+                    - username
+                    - email
+                    - password
+        '422':
+          description: Username can't be blank
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                user[username]:
+                  type: string
+                user[email]:
+                  type: string
+                user[password]:
+                  type: string
+              required:
+              - user[username]
+              - user[email]
+              - user[password]
+        description: Username, email, and password are needed to create a new user.
+  
+  "/api/users/sign_in":
+    post:
+      summary: Logs a user in
+      tags:
+      - Users
+      responses:
+        '200':
+          description: user logged in successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  username:
+                    type: string
+                  token:
+                    type: string
+        '401':
+          description: user not registered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                session[username]:
+                  type: string
+                session[password]:
+                  type: string
+              required:
+              - session[username]
+              - session[password]
+        description: A username of an existing user needed to sign in.
+
+  "/api/my_reservations":
+    get:
+      summary: Retrieves all reservations for the current user
+      security:
+        - bearerAuth: []
+      tags:
+        - Reservations
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reservation:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      date:
+                        type: string
+                        format: date
+                      city:
+                        type: string
+                      car_id:
+                        type: integer
+                      user_id:
+                        type: integer
+                    required:
+                    - id
+                    - date
+                    - city
+                    - car_id
+                    - user_id
+
+  "/api/new_reserve":
+    post:
+      parameters:
+        - name: car
+          in: query
+          description: Car ID
+          required: true
+          schema:
+            type: integer
+      summary: Creates a new reservation
+      security:
+        - bearerAuth: []
+      tags:
+        - Reservations
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: string
+        '422':
+          description: reservation not created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                reservation[date]:
+                  description: YYYY-MM-DD
+                  type: string
+                  format: date
+                reservation[city]:
+                  type: string
+              required:
+              - reservation[date]
+              - reservation[city]
+            example:
+              $ref: '#components/examples/reservation'
+
+  "/api/all_cars":
+    get:
+      summary: Retrieves all cars
+      security:
+        - bearerAuth: []
+      tags:
+        - Cars
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cars:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        image:
+                          type: string
+                        pricePerHr:
+                          type: integer
+                        seating_capacity:
+                          type: integer
+                        rental_duration:
+                          type: integer
+                      required:
+                      - id
+                      - name
+                      - description
+                      - image
+                      - pricePerHr
+                      - seating_capacity
+                      - rental_duration
+                  success:
+                    type: string
+
+  "/api/cars/{id}":
+    parameters:
+      - name: id
+        in: path
+        description: Car ID
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Retrieves a specific car
+      security:
+        - bearerAuth: []
+      tags:
+        - Cars
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  car:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        image:
+                          type: string
+                        pricePerHr:
+                          type: integer
+                        seating_capacity:
+                          type: integer
+                        rental_duration:
+                          type: integer
+                      required:
+                      - id
+                      - name
+                      - description
+                      - image
+                      - pricePerHr
+                      - seating_capacity
+                      - rental_duration
+
+    delete:
+      summary: Deletes a car
+      security:
+        - bearerAuth: []
+      tags:
+      - Cars
+      responses:
+        '201':
+          description: car deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: string
+        '404':
+          description: 'Car Not Found'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  "/api/car/new_car":
+    post:
+      summary: Creates a new car
+      security:
+        - bearerAuth: []
+      tags:
+        - Cars
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '422':
+          description: 'Car not created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'

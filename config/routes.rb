@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  mount Rswag::Ui::Engine => '/api-docs'
+  mount Rswag::Api::Engine => '/api-docs'
+
   namespace :api do
     devise_for :users,
       controllers: {
@@ -7,7 +10,9 @@ Rails.application.routes.draw do
       }
 
     resources :cars do
-      delete 'destroy', on: :member, to: 'cars#destroy'
+      member do
+        delete 'destroy'
+      end
     end
 
     get 'all_cars', to: 'cars#index'
