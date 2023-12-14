@@ -18,7 +18,6 @@
     - [Install](#install)
     - [Frontend Repository](#frontend-repository)
     - [ERD Image](#erd-image)
-  - [follow the below link to access](#follow-the-below-link-to-access)
     - [API Documentation](#api-documentation)
     - [Usage](#usage)
     - [Run tests](#run-tests)
@@ -103,12 +102,13 @@ Open the terminal in the root directory of the project and run the following com
 Reference the [Frontend Repository](https://github.com/tan12082001/Vehicle-Booking-App-Frontend.git) for the corresponding frontend.
 
 ### ERD Image
-Add an ERD image to visualize the database schema.
-## follow the below link to access
-(https://drawsql.app/teams/wineshuga/diagrams/book-appointment)
+[ERD image to visualize the database schema](https://drawsql.app/teams/wineshuga/diagrams/book-appointment)
 
 ### API Documentation
-Reference the API documentation for details on how to interact with the API.
+For details on how to interact with the API, view the API documentation. Follow the steps below:
+
+    - run server `rails s`
+    - open in browser `http://localhost:4000/api-docs`
 
 ### Usage
 To start the development server, run the following command then navigate to `localhost:4000` in your browser.
