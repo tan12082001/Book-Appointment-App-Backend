@@ -4,10 +4,11 @@ class Api::MyReservationsController < ApplicationController
   def index
     @reservations = MyReservation.where(user_id: current_api_user)
     reservations_json = @reservations.map do |item|
+      car = Car.with_deleted.find(item.car_id)
       {
         'car' => {
-          'id' => item.car.id,
-          'name' => item.car.name
+          'id' => car.id,
+          'name' => car.name
         },
         'date' => item.date,
         'city' => item.city,
@@ -22,14 +23,18 @@ class Api::MyReservationsController < ApplicationController
   def create
     @car = Car.find(params[:car_id])
 
-    @reservation = MyReservation.new(reserve_params)
-    @reservation.user = current_api_user
-    @reservation.car = @car
+    if @car.deleted_at.nil?
+      @reservation = MyReservation.new(reserve_params)
+      @reservation.user = current_api_user
+      @reservation.car = @car
 
-    if @reservation.save
-      render json: @reservation, status: :created, location: api_my_reservations_path
+      if @reservation.save
+        render json: @reservation, status: :created, location: api_my_reservations_path
+      else
+        render json: @reservation.errors, status: :unprocessable_entity
+      end
     else
-      render json: @reservation.errors, status: :unprocessable_entity
+      render json: { error: 'Cannot create reservation for a deleted car' }, status: :unprocessable_entity
     end
   end
 
