@@ -8,4 +8,5 @@ class Car < ApplicationRecord
   validates :pricePerHr, presence: true
   validates :seating_capacity, presence: true
   validates :rental_duration, presence: true
+  validates :image, presence: true
 end
