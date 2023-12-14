@@ -44,3 +44,5 @@ gem 'paranoia', '~> 2.5'
 gem 'rack-cors'
 gem 'rswag'
 gem 'shoulda-matchers'
+
+gem "jsonapi-serializer", "~> 2.2"
