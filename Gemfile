@@ -45,4 +45,4 @@ gem 'rack-cors'
 gem 'rswag'
 gem 'shoulda-matchers'
 
-gem "jsonapi-serializer", "~> 2.2"
+gem 'jsonapi-serializer', '~> 2.2'
