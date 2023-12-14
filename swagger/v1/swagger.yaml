@@ -95,7 +95,26 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserResponse'
+                type: object
+                properties:
+                  message:
+                    type: string
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      username:
+                        type: string
+                      email:
+                        type: string
+                      password:
+                        type: string
+                    required:
+                    - id
+                    - username
+                    - email
+                    - password
         '422':
           description: Username can't be blank
           content:
@@ -109,18 +128,60 @@ paths:
             schema:
               type: object
               properties:
-                username:
+                user[username]:
                   type: string
-                email:
+                user[email]:
                   type: string
-                password:
+                user[password]:
                   type: string
               required:
-                - username
-                - email
-                - password
-              $ref: '#/components/schemas/UserRegistration'
+              - user[username]
+              - user[email]
+              - user[password]
         description: Username, email, and password are needed to create a new user.
+  
+  "/api/users/sign_in":
+    post:
+      summary: Logs a user in
+      tags:
+      - Users
+      responses:
+        '200':
+          description: user logged in successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  username:
+                    type: string
+                  token:
+                    type: string
+        '401':
+          description: user not registered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                session[username]:
+                  type: string
+                session[password]:
+                  type: string
+              required:
+              - session[username]
+              - session[password]
+        description: A username of an existing user needed to sign in.
 
   "/api/my_reservations":
     get:
@@ -135,8 +196,36 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ReservationListResponse'
-  
+                type: object
+                properties:
+                  workspaces:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        image:
+                          type: string
+                        pricePerHr:
+                          type: integer
+                        seating_capacity:
+                          type: integer
+                        rental_duration:
+                          type: integer
+                      required:
+                      - id
+                      - name
+                      - description
+                      - image
+                      - pricePerHr
+                      - seating_capacity
+                      - rental_duration
+ 
   "/api/new_reserve":
     post:
       parameters:
@@ -157,18 +246,38 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ReservationResponse'
+                type: object
+                properties:
+                  success:
+                    type: string
         '422':
           description: reservation not created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
       requestBody:
         content:
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/ReservationCreation'
+              type: object
+              properties:
+                reservation[date]:
+                  description: YYYY-MM-DD
+                  type: string
+                  format: date
+                reservation[city]:
+                  type: string
+              required:
+              - reservation[date]
+              - reservation[city]
+            example:
+              $ref: '#components/examples/reservation'
 
   "/api/all_cars":
     get:
@@ -183,8 +292,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CarResponse'
-  
+                type: object
+                properties:
+                  reservation:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      date:
+                        type: string
+                        format: date
+                      city:
+                        type: string
+                      car_id:
+                        type: integer
+                      user_id:
+                        type: integer
+                    required:
+                    - id
+                    - date
+                    - city
+                    - car_id
+                    - user_id
+                  success:
+                    type: string
+
   "/api/cars/{id}":
     parameters:
       - name: id
@@ -205,13 +337,48 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CarResponse'
+                type: object
+                properties:
+                  workspace:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      description:
+                        type: string
+                      image_url:
+                        type: string
+                    required:
+                    - id
+                    - name
+                    - description
+    delete:
+      summary: Deletes a car
+      security:
+        - bearerAuth: []
+      tags:
+      - Cars
+      responses:
+        '201':
+          description: car deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: string
         '404':
           description: 'Car Not Found'
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                type: object
+                properties:
+                  error:
+                    type: string
 
   "/api/car/new_car":
     post:
@@ -226,7 +393,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CarResponse'
+                type: object
+                properties:
+                  error:
+                    type: string
         '422':
           description: 'Car not created'
           content:
