@@ -1,11 +1,11 @@
 databases:
   - name: rails-projects
-    databaseName: 
-    user: 
+    databaseName: budget_app_production_ejzz
+    user: budget_app_production_ejzz_user
 
 services:
   - type: web
-    name: 
+    name: cabooky-api-v1
     runtime: ruby
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
