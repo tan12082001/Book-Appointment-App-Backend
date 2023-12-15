@@ -30,4 +30,4 @@ test:
 
 production:
   <<: *default
-  database: vehicle_booking_app_backend_production
+  url: <%= ENV['DATABASE_URL'] %>
