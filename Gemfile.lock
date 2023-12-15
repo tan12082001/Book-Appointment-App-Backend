@@ -290,6 +290,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
+  bundler (>= 2.0.0)
   database_cleaner
   debug
   devise (~> 4.9)
