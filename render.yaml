@@ -1,18 +1,18 @@
 databases:
-  - name: cabooky
+  - name: cabooky_db
     databaseName: cabooky_db
     user: cabooky_db_user
 
 services:
   - type: web
-    name: cabooky-app
+    name: cabooky2
     runtime: ruby
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: cabooky
+          name:  cabooky_db
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
