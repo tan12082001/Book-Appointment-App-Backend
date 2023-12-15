@@ -1,5 +1,9 @@
 require "active_support/core_ext/integer/time"
 
+Rails.application.routes.default_url_options = {
+  host: 'https://cabooky-api-v1.onrender.com'
+}
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -18,7 +22,6 @@ Rails.application.configure do
   # Ensures that a master key has been made available in ENV["RAILS_MASTER_KEY"], config/master.key, or an environment
   # key such as config/credentials/production.key. This key is used to decrypt credentials (and other encrypted files).
   # config.require_master_key = true
-  config.action_mailer.default_url_options = { host: 'https://cabooky-api-v1.onrender.com' }
   # Disable serving static files from `public/`, relying on NGINX/Apache to do so instead.
   # config.public_file_server.enabled = false
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present? || ENV['RENDER'].present?
