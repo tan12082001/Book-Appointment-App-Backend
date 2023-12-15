@@ -24,11 +24,14 @@ components:
           type: string
         password:
           type: string
+        password_confirmation:
+          type: string
       required:
         - id
         - username
         - email
         - password
+        - password_confirmation
 
     Reservation:
       type: object
@@ -110,11 +113,14 @@ paths:
                         type: string
                       password:
                         type: string
+                      password_confirmation:
+                        type: string
                     required:
                     - id
                     - username
                     - email
                     - password
+                    - password_confirmation
         '422':
           description: Username can't be blank
           content:
@@ -134,10 +140,13 @@ paths:
                   type: string
                 user[password]:
                   type: string
+                user[password_confirmation]:
+                  type: string
               required:
               - user[username]
               - user[email]
               - user[password]
+              - user[password_confirmation]
         description: Username, email, and password are needed to create a new user.
   
   "/api/users/sign_in":
