@@ -12,7 +12,7 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: cabooky_db
+          name: cabooky-db
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
