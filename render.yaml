@@ -1,7 +1,7 @@
 databases:
   - name: full-stack-capstone
-    databaseName: cabooky_production_database
-    user: cabooky_production_database_user
+    databaseName: full_stack_capstone
+    user: full_stack_capstone_user
 
 services:
   - type: web
